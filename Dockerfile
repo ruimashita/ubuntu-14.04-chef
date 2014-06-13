@@ -28,5 +28,12 @@ deb-src http://security.ubuntu.com/ubuntu trusty-security multiverse" > /etc/apt
 
 RUN apt-get -y update
 RUN apt-get -y install curl build-essential git
+
+# install chef
 RUN curl -L https://www.opscode.com/chef/install.sh | bash
 
+# set locale
+RUN locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8
+
+# clean apt
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
